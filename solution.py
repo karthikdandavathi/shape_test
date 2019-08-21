@@ -1,10 +1,12 @@
 from selenium.webdriver import Firefox
 from selenium.webdriver.firefox.options import Options
+
 class ShapeTest:
     def __init__(self,url):
         self.url = url
         self.browser = self.setup()
         self.content = self.browser.find_element_by_xpath('//*[@id="content"]/div/div').text
+        self.images = self.browser.find_elements_by_tag_name('img')
         self.image_links = self.get_image_links()
 
     def setup(self):
@@ -30,31 +32,18 @@ class ShapeTest:
 
     def get_image_links(self):
         image_links = []
-        images = self.browser.find_elements_by_tag_name('img')
-        for image in images:
+        for image in self.images:
             image_links.append(image.get_attribute("src"))
-        return self.image_links
+        return image_links
 
     def check_for_punisher(self,punisher):
         if punisher in self.image_links:
             return True
         return False
 
-    def print_all_image_names(self):
-        for img in self.image_links:
-            pass
-
-
-
-
-    def rand_name(self):
-        name = ' '.join([name_words[random.randint(0, len(name_words))] for i in range(2)])
-        return name
-
 if __name__ == '__main__':
     url = "https://the-internet.herokuapp.com/dynamic_content"
     shape_test = ShapeTest(url)
-    print(shape_test.content)
 
     # checks if longest word is greater than 10 characters
     print(shape_test.is_atleast(10))
