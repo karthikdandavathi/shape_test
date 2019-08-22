@@ -51,5 +51,5 @@ if __name__ == '__main__':
     #prints longest word
     print(shape_test.find_longest_word(shape_test.content))
 
-    #checks for punisher image in the content and prints image names
+    #checks for punisher image in the content
     print(shape_test.check_for_punisher('https://the-internet.herokuapp.com/img/avatars/Original-Facebook-Geek-Profile-Avatar-3.jpg'))
